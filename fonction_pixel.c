@@ -7,7 +7,7 @@
 // Calcul du pixel courant
 /* 
     requires : seau_opacite et seau_couleur
-    assigns : nothingaaa
+    assigns : nothing
     ensures : retourne le pixel courant
 */
 pixel calcul_pixel_courant(list_opacite seau_opacite, list_couleur seau_couleur) 
