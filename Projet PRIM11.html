@@ -1,0 +1,453 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+   <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link rel="stylesheet" type="text/css"
+   href="../../stylesheets/empty.css">
+   <TITLE>Projet PRIM11</TITLE>
+</HEAD>
+<body>
+<h1>
+Programmation impérative, projet 2022
+</h1>
+<h3>Dates et principe</h3>
+Cette page peut être mise à jour, avec informations complémentaires,
+précisions, <em><a href ="projet_2022.html#bonus">questions
+	bonus</a></em>, etc. Pensez à y revenir souvent.<br>
+<hr>
+Projet à rendre pour le <b>8/1/2022</b> à <b>23h59</b>, aucun retard ne sera toléré.<br>
+Des soutenances pourront potentiellement être organisées ensuite.<br><br>
+<br><br>  
+<b>Lire tout le sujet.</b><br><br>
+
+Un rendu de projet comprend :
+<ul>
+<li> Un rapport typographié précisant vos choix, les problèmes
+  techniques qui se posent et les solutions trouvées ; il présente en
+  introduction le contexte et le sujet du projet, et il précise en
+  conclusion les limites de votre programme. Le rapport sera de
+  préférence composé avec <span style="font-family:serif;margin-right:-.7em">L<span style="font-size:0.9em;position:relative;top:-.1em;left:-0.4em;">A</span><span style="position:relative;left:-.5em;">T</span><span style="position:relative;top:.2em;left:-.6em;">E</span><span style="position:relative;left:-.7em;">X</span></span>. Le soin apporté à la grammaire et à
+  l'orthographe est largement pris en compte.</li>
+<li> Un code <em>abondamment</em> commenté ; la première partie des
+  commentaires comportera systématiquement les lignes :<br>
+<ol>
+<li><tt>@ requires </tt> décrivant les préconditions : c'est-à-dire
+conditions sur les paramètres pour une bonne utilisation (<b>pas de
+  typage ici</b>),</li>
+<li><tt>@ assigns </tt> listant les zones de mémoire modifiées,</li>
+<li><tt>@ ensures </tt>  décrivant la propriété vraie à la sortie de la
+fonction lorsque les préconditions sont respectées, le cas échéant
+avec mention des comportements en cas de succès et en cas d'échec,</li>
+</ol>
+En outre chaque boucle <tt>while</tt> doit contenir un commentaire
+précisant la raison de sa terminaison (le cas échéant). De même en
+cas d'appels récursifs.<br>  On pourra
+préciser des informations additionnelles si des techniques
+particulières méritent d'être mentionnées.
+<br><br>
+Le code doit enfin compiler sans erreur (évidemment) et sans warning lorsque
+l'option <tt>-Wall</tt> est utilisée.
+
+<b>Un code qui ne compile pas
+se verra attribuer la note de 0.</b></p></li>
+<li>Un manuel d'utilisation de votre exécutable, même minimal, est toujours bienvenu.</li>
+</ul>
+Avez-vous lu tout le sujet ?
+
+<hr>
+<h4>Protocole de dépôt</h4>
+<p>
+  Vous devez rendre 
+  <ul> 
+    <li> votre rapport (en pdf) et</li> 
+    <li> vos fichiers de code</li>
+  </ul>
+  rassemblés dans une archive tar gzippée identifiée
+  comme <em>votre_prénom_votre_nom</em><tt>.tgz</tt>.<br>  La commande
+  devrait ressembler à :<br>
+  <tt>tar zcvf randolph_carter.tgz rapport.pdf fichiers.c
+    autres_trucs_éventuels.c</tt>&hellip;<br>
+  <b>N'OUBLIEZ surtout PAS de mettre le nom identifiant l'archive</b>
+  (donc nouveau) <b>en PREMIER.</b><br>
+  <b>Lisez le man !</b> et testez le contenu de votre archive (une
+  commande comme par exemple&nbsp;:<br> <tt>tar tvf
+  randolph_carter.tgz</tt> doit lister les fichiers et donner leur
+  taille).
+  <ul>
+    <li><b>Une archive qui ne contient pas les fichiers demandés ne
+	sera pas excusable.</b></li>
+    <li><b>**Une archive qui n'est pas au format demandé</b> (archive
+    tar gzippée avec suffixe .tgz) <b>ne sera
+	pas corrigée**</b> donc c'est 0/20.</li>
+  </ul>
+</p>
+<p>
+  <!-- <em>La procédure pour déposer votre dossier vous sera communiquée -->
+  <!-- ultérieurement.</em> -->
+<p>Toute tentative de fraude (plagiat, etc.) sera sanctionnée. Si
+  plusieurs projets ont <b>des sources trop similaires</b> (y compris
+  sur une partie du code uniquement), <em>tous</em> leurs auteurs se
+  verront attribuer la note 0/20. En particulier, il faudra prendre
+  soin de ne pas publier son travail sur un dépôt public (en tout cas
+  pas avant la date de fin de rendu). On évitera également de demander
+  (ou de donner) des conseils trop précis à ses camarades (y compris
+  des promotions précédentes), ces conseils ayant pu être donnés à
+  plusieurs personnes. Les rendus seront comparés deux à deux.
+
+</p>
+<p>
+<b>Procédure de dépôt</b><br> Vous devez enregistrer
+votre archive tgz dans le dépôt dédié au cours PRIM11 (prim11-2022) en vous
+connectant à <a href="http://exam.ensiie.fr">http://exam.ensiie.fr</a>. Ce dépôt sera ouvert
+jusqu'au 8 janvier inclus.
+</p>
+
+<hr>
+
+<h3>Contexte</h3>
+<p>Le but de ce projet est d'implémenter un interpréteur pour un petit
+  langage graphique.
+</p>
+  <h3>Interface</h3>
+<p>L'exécutable final devra lire sur l'entrée standard un fichier qui
+  contient la taille de l'image à calculer, puis une série de
+  caractères qui indiqueront comment construire l'image. L'image
+  calculée sera ensuite écrite sur la sortie standard sous la forme
+  d'un <a href="https://fr.wikipedia.org/wiki/Portable_pixmap">fichier
+  PPM</a>.
+</p>
+
+<p>Si le programme final s'appelle <code>prog</code>, et qu'on a un
+  fichier d'entrée nommé <code>test.ipi</code>, il devrait être
+  possible d'entrer la commande
+<pre>
+./prog < test.ipi | display    
+</pre>
+pour calculer l'image décrite dans <code>test.ipi</code> et l'afficher
+en utilisant la visionneuse d'<a href="https://imagemagick.org/">Image Magick</a>.
+
+<h3>État de la machine</h3>
+<p>Le calcul de l'image à produire se fait à l'aide d'une machine à
+  états. On dispose de jusqu'à dix calques surposés, chacun étant de
+  la taille de l'image à produire. On peut déplacer un curseur sur le
+  calque du dessus, et tracer des lignes entre la position courante et
+  la dernière position marquée. On peut aussi remplir la couleur à la
+  position du curseur, comme avec l'outil &laquo; remplissage &raquo;
+  <img src="fill.svg"/> des
+  outils d'imagerie courants. La couleur à utiliser est déterminée à
+  l'aide d'un seau dans lequel on peut ajouter des doses de couleurs
+  de bases ; la couleur courante est alors la moyenne des couleurs
+  contenues dans le seau. Un autre seau contiendra des doses
+  d'opacité, ce qui permettra de calculer l'opacité courante.<br/>
+
+  Un état de cette machine sera constitué des éléments
+suivants&nbsp;:
+  <ul>
+    <li>deux entiers indiquant la position courante du curseur&nbsp;;
+    </li>
+    <li>deux entiers indiquant la dernière position marquée&nbsp;;
+    </li>
+    <li>un élément qui indique la direction du curseur&nbsp;; celle-ci
+      peut être Nord, Est, Sud ou Ouest&nbsp;;
+    </li>
+    <li>un multiensemble de couleurs qui représente le seau dans lequel
+      sont mélangées des doses de couleurs pour produire la couleur
+      courante&nbsp;;
+    </li>
+    <li>un multiensemble d'opacités qui représente le seau dans lequel
+      sont mélangées des doses d'opacités pour produire l'opacité
+      courante&nbsp;;
+    </li>
+    <li>une pile de calques de taille au plus 10, chaque calque étant
+    une grille de pixels de la taille de l'image à produire.</li>
+  </ul>
+<p>On aura besoin des types de données suivants&nbsp;:</p>
+<ul><li>Une composante est un entier non signé sur 1 octet.</li>
+
+<li>Une couleur est formée de trois composantes pour le rouge, le
+  vert et le bleu.</li>
+
+<li>Une opacité est donnée par une composante&nbsp;; 0 correspond
+  à la transparence totale, tandis que 255 correspond à l'opacité
+  totale.</li>
+<li>Un pixel est formé par une couleur et une opacité.</li>
+<li>Un calque est une grille carrée de pixels, de la taille de l'image
+  à produire au final.</li>
+</ul>
+
+<p>Initialement, l'état de la machine est le suivant&nbsp;:</p>
+<ul>
+  <li>les positions courante et marquée sont toutes les deux en (0,0)&nbsp;;</li>
+  <li>la direction est Est&nbsp;;</li>
+  <li>les seaux de couleurs et d'opacités sont vides tous les deux&nbsp;;</li>
+  <li>la pile contient un seul calque&nbsp;; chaque pixel de ce calque
+  est formé de la couleur (0,0,0) et de l'opacité 0.</li>
+</ul>
+
+<h4><a id="currentpix"/>Calcul du pixel courant</h4>
+<p>Le pixel courant correspondant au contenu des seaux est calculé de la
+  façon suivante&nbsp;:</p>
+<ul>
+  <li>on fait la moyenne (entière) des opacités du seau d'opacités, ce
+  qui nous donne l'opacité courante&nbsp;;</li>
+  <li>si ce seau est vide, on prend 255 comme
+  valeur pour l'opacité courante&nbsp;;</li>
+  <li>on fait la moyenne (entière) de chacune des composantes des
+  couleurs contenues dans le seau de couleurs&nbsp;;</li>
+  <li>la valeur de chaque composante de la couleur du pixel courant
+  est alors cette moyenne multipliée par l'opacité calculée
+  précédemment puis divisée par 255&nbsp;;</li>
+  <li>si le seau de couleurs est vide, on prend comme
+    valeur 0 pour chacune des composantes de la couleur courante.</li>
+</ul>
+
+<p>Par exemple, si le seau de couleurs contient deux doses de rouge
+  (255,0,0) et une
+dose de jaune (255,255,0), et que le seau d'opacités contient une dose d'opacité complète (255) et une
+dose de transparence totale (0), la moyenne des doses d'opacité sera
+de 127. La moyenne des composantes des doses de couleur sera
+(255,85,0). Le pixel courant aura donc pour couleur (127, 42, 0) et
+pour opacité 127.</p>
+
+<h3>Format d'entrée</h3>
+<p>Le format proposé est composé d'une première ligne, qui contient un
+entier donné en mode texte. Cet entier correspond à la largeur et la
+hauteur de l'image qui sera produite. (Celle-ci est donc carrée.)
+</p>
+<p>La suite du fichier contient des caractères dont certains modifieront
+l'état de la machine &nbsp;:
+</p>
+<dl>
+  <dt><code>n</code></dt>
+  <dd>Ajoute la couleur noire (c'est-à-dire (0,0,0)) dans le seau de couleurs.</dd>
+
+  <dt><code>r</code></dt>
+  <dd>Ajoute la couleur rouge (c'est-à-dire (255,0,0)) dans le seau de couleurs.</dd>
+
+  <dt><code>g</code></dt>
+  <dd>Ajoute la couleur verte (c'est-à-dire (0,255,0)) dans le seau de couleurs.</dd>
+
+  <dt><code>b</code></dt>
+  <dd>Ajoute la couleur bleue (c'est-à-dire (0,0,255)) dans le seau de couleurs.</dd>
+
+  <dt><code>y</code></dt>
+  <dd>Ajoute la couleur jaune (c'est-à-dire (255,255,0)) dans le seau de couleurs.</dd>
+
+  <dt><code>m</code></dt>
+  <dd>Ajoute la couleur magenta (c'est-à-dire (255,0,255)) dans le seau de couleurs.</dd>
+
+  <dt><code>c</code></dt>
+  <dd>Ajoute la couleur cyan (c'est-à-dire (0,255,255)) dans le seau de couleurs.</dd>
+  <dt><code>w</code></dt>
+  <dd>Ajoute la couleur blanche (c'est-à-dire (255,255,255)) dans le seau de couleurs.</dd>
+
+  <dt><code>t</code></dt>
+  <dd>Ajoute l'opacité transparente (0) dans le seau d'opacités.</dd>
+
+  <dt><code>o</code></dt>
+  <dd>Ajoute l'opacité complète (255) dans le seau d'opacités.</dd>
+
+  <dt><code>i</code></dt>
+  <dd>Vide les seaux de couleurs et d'opacité.</dd>
+
+  <dt><code>v</code></dt>
+  <dd>Avance la position du curseur d'un pas dans la direction
+  courante&nbsp;; si le bord de l'image est atteint, on repasse de
+  l'autre coté.</dd>
+
+  <dt><code>h</code></dt>
+  <dd>Tourne la direction courante dans le sens horaire.</dd>
+
+  <dt><code>a</code></dt>
+  <dd>Tourne la direction courante dans le sens anti-horaire.</dd>
+
+  <dt><code>p</code></dt>
+  <dd>Met à jour la position marquée en y mettant la position
+    actuelle du curseur.</dd>
+
+  <dt><code>l</code></dt>
+  <dd>Trace une ligne entre la position du curseur et la position
+    marquée, en utilisant l'algorithme décrit ci-dessous.</dd>
+
+  <dt><code>f</code></dt>
+  <dd>Remplit la zone de même couleur autour du curseur, en la
+  remplaçant par la couleur courante, à l'aide de l'algorithme décrit
+  ci-dessous.</dd>
+
+  <dt><code>s</code></dt>
+  <dd>Ajoute un nouveau calque dans la pile de calques&nbsp;; chaque
+  pixel de ce nouveau calque sera formé de la couleur (0,0,0) et de
+  l'opacité 0&nbsp;; s'il y a déjà 10 calques dans la pile, ne fait rien.</dd>
+
+  <dt><code>e</code></dt>
+  <dd>Fusionne les deux calques les plus hauts dans la pile, comme
+  décrit ci-dessous&nbsp;; il y aura donc un calque de moins dans la
+  pile&nbsp;; s'il n'y a qu'un seul calque, ne fait rien.</dd>
+
+  <dt><code>j</code></dt>
+  <dd>Découpe le calque situé juste en dessous du sommet de la pile en
+  utilisant comme masque les opacités de celui au sommet
+  (cf. ci-dessous)&nbsp;; retire celui au sommet&nbsp;; s'il n'y a
+  qu'un seul calque, ne fait rien.</dd>
+</dl>
+<p>Les autres caractères seront ignorés, y compris les versions
+  en majuscule des caractères ci-dessus.</p>
+<h4>Tracé de lignes</h4>
+
+<p>Pour tracer une ligne entre la position (x0, y0) à la position (x1,
+y1), on utilisera l'algorithme suivant&nbsp;: (<code>|x|</code>
+  représente la valeur absolue de <code>x</code>, toutes les
+  opérations se font sur les entiers)</p>
+
+<pre>
+&delta;x := x1 - x0
+&delta;y := y1 - y0
+d := max(|&delta;x|, |&delta;y|)
+si &delta;x et &delta;x sont non nuls et de même signe
+alors s := 0
+sinon s := 1
+x := x0 * d + (d - s) / 2
+y := y0 * d + (d - s) / 2
+répéter d fois
+  changer le pixel en (x/d, y/d) par le pixel courant
+  x := x + &delta;x
+  y := y + &delta;y
+changer le pixel en (x1, y1) par le pixel courant
+</pre>
+
+<p>Le pixel courant est celui correspondant aux seaux, cf. <a href="#currentpix">supra</a>.</p>
+
+<h4>Remplissage</h4>
+<p>Pour remplir une zone de couleur depuis la position (x,y) sur le
+  calque <code>calque</code>, on appellera la
+  fonction <code>fill</code> décrite ci-dessous avec comme paramètres
+  <code>x, y, calque[x,y], courant, calque</code>
+  où <code>courant</code> est le <a href="#currentpix">pixel courant</a>, à condition que ce
+  pixel courant soit différent de celui déjà en (x,y), sinon on
+  ne fait rien.</p>
+
+<pre>
+fonction fill(x, y, ancien, nouveau, calque)
+  si calque[x,y] = ancien
+  alors
+    calque[x,y] := nouveau
+    si x > 0 alors fill(x-1, y, ancien, nouveau, calque)
+    si y > 0 alors fill(x, y-1, ancien, nouveau, calque)
+    si x < size-1 alors fill(x+1, y, ancien, nouveau, calque)
+    si y < size-1 alors fill(x, y+1, ancien, nouveau, calque)
+</pre>
+<p>où <code>size</code> est la taille de l'image à produire.</p>
+<p>Remarque : sur de grands calques, une implémentation récursive de
+  la fonction <code>fill</code> comme décrit ci-dessus peut conduire à
+  des dépassements de pile. Vous devrez plutôt utiliser une pile
+  explicite dans laquelle vous mettrez l'ensemble des positions qu'il
+  reste encore à traiter.</p>
+
+<h4>Fusion de calques</h4>
+<p>Pour fusionner deux calques c0 et c1, on procède de la manière
+  suivante pour chacun des pixels du nouveau calque&nbsp;:</p>
+<ul>
+  <li>on note &alpha;0 l'opacité de c0 à cette position&nbsp;;</li>
+  <li>la valeur de chacune des composantes du nouveau pixel (couleur
+  et opacité) vaut celle en c0 plus (celle en c1 fois (255 - &alpha;0)
+  divisé par 255).
+</ul>
+
+<p>Par exemple, si le pixel de c0 a pour couleur (127, 42, 0) et pour
+  opacité 127, et que celui en c1 a pour couleur (0, 100, 200) et pour
+  opacité 200, le pixel de la fusion aura pour couleur (127, 92, 100)
+  et pour opacité 227.</p>
+
+<p>Remarque&nbsp;: il n'y a pas de dépassement de capacité pour les
+  nouvelles composantes, parce que de la façon dont est calculé le
+  pixel courant, les composantes des couleurs ne peuvent pas être plus
+  grandes que la composante de l'opacité.</p>
+
+<h4>Découpage de calques</h4>
+<p>Pour découper un calque c1 en utilisant l'opacité d'un calque c0
+  comme masque, on procède de la manière
+  suivante pour chacun des pixels du nouveau calque&nbsp;:</p>
+<ul>
+  <li>on note &alpha;0 l'opacité de c0 à cette position&nbsp;;</li>
+  <li>la valeur de chacune des composantes du nouveau pixel (couleur
+  et opacité) vaut celle en c1 fois &alpha;0 divisé par 255.
+</ul>
+
+<p>Par exemple, si le pixel de c0 a pour couleur (127, 42, 0) et pour
+  opacité 127, et que celui en c1 a pour couleur (0, 100, 200) et pour
+  opacité 200, le pixel de la fusion aura pour couleur (0, 49, 99)
+  et pour opacité 99.</p>
+
+<h4>Production de l'image finale</h4>
+<p>Une fois l'entrée complètement lue, on prendra le calque situé en
+  haut de la pile pour obtenir l'image finale. On ne prendra en compte
+  que les couleurs et on oubliera donc l'opacité.</p>
+<p>On écrira sur la sortie standard l'image correspondante au format
+  PPM vu en cours.</p>
+
+<h3>Exemples</h4>
+
+On trouvera dans le
+fichier <a href="exemples_ipi_2022.tgz">exemples_ipi_2022.tgz</a> un
+certains nombres de fichiers d'entrées
+(<em>exemple</em><code>.ipi</code>) avec l'image devant être produite
+(<em>exemple</em><code>.ppm</code>), afin que vous puissiez tester
+votre programme.
+
+<p>D'autres exemples seront possiblement proposés d'ici la date de rendu.
+</p>
+
+<p>Lors de la correction, votre programme sera testé avec des exemples
+  qui n'auront pas été fournis à l'avance&nbsp;; faire passer les
+  exemples ne suffira donc pas, il faudra bien respecter la
+  spécification.</p>
+<h3><a id="bonus">Bonus</a></h3>
+<ul>
+  <li>
+    Permettre au programme de prendre des arguments en ligne de
+    commande :
+    <ul>
+      <li>si un premier argument est fourni, ce sera le nom d'un fichier qui
+	sera lu en entrée à la place de l'entrée standard ;</li>
+      <li>si un deuxième argument est fourni, ce sera le nom d'un fichier qui
+	sera écrit en sortie à la place de la sortie standard ;</li>
+      <li>les autres arguments seront ignorés, avec un avertissement
+	sur la sortie d'erreur standard.</li>
+      </ul>
+  </li>
+  <li>Ajouter une interface graphique qui montre la construction de
+  l'image au fur et à mesure de son calcul.</li>
+</ul>
+
+<h3>Conseils</h3> <p>Pour la récupération d'une entrée de l'utilisateur,
+plutôt que faire un <tt>scanf</tt> directement, il vaut parfois mieux
+récupérer une ligne en entier avec <tt>fgets</tt> puis
+utiliser <tt>sscanf</tt> dessus&nbsp;; on peut utiliser la suite de
+commandes suivantes&nbsp;:
+<pre>
+char buf[256];
+ .
+ .
+ .
+fgets(buf, 256, stdin);
+sscanf(buf, "format", ...);
+</pre>
+</p>
+<p>Pour lire un seul caractère, on pourra
+  utiliser <code>getc</code>, qui renvoie <code>EOF</code> en cas
+  d'erreur ou en fin de fichier.</p>
+<p>Il pourra être opportun d'utiliser certaines fonctions de la
+  bibliothèque standard comme <code>memcpy</code>
+  ou <code>memset</code>. Se reporter aux pages de manuel pour leur
+  fonctionnement.</p>
+<p>Vous devez avoir lu jusqu'ici avant de commencer.</p>
+
+</body>
+</html>
+
+
+
+
+
+
