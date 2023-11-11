@@ -11,6 +11,7 @@ Par exemple :
 hvvvvvvvvvvvvavvagpvvvvvvvvlhpvvvvlhpvvvvvvvvlhpvvvvlhhvvvvvvvvapvvvvvvvvlhvvvvphvvvvhvvvvlpavvvvavvvvl
 
 donnerait l'image 
+
 ![ExempleOK](exemples_ipi/ok.png)
 
 
