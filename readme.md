@@ -6,8 +6,8 @@ Bienvenue dans le projet PRIM11 de programmation impérative. Ce projet consiste
 ## Exemples
 Des exemples d'entrées et de sorties sont fournis dans le dossier "exemples_ipi".
 
-Par exemple : 
-17
+Par exemple :  
+17  
 hvvvvvvvvvvvvavvagpvvvvvvvvlhpvvvvlhpvvvvvvvvlhpvvvvlhhvvvvvvvvapvvvvvvvvlhvvvvphvvvvhvvvvlpavvvvavvvvl
 
 donnerait l'image 
@@ -18,8 +18,7 @@ donnerait l'image
 
 
 ## Utilisation
-Le fichier ipi doit commencer par un entier strictement positif à la première ligne
-Puis en seconde ligne, une suite de caractères.
+Le fichier ipi doit commencer par un entier strictement positif à la première ligne, puis en seconde ligne, une suite de caractères.
 
 Pour exécuter le programme :
 
